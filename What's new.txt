@@ -1,0 +1,117 @@
+--------------Examples 10-----------------
+
++Languages/Python3/sqlite3_python.py
++Languages/C++/matrix_mult.cpp
++Languages/C++/simple_vector.cpp
++Network/git/ucc
++Network/git/git2-examples
++Network/Chat
++Audio/OpenSLES/SawtoothBufferQueue.c
++Audio/XAudio/XAudio2BasicSound.c
++C Standard Library/printf_escape.c
++Compilers/LLVM/llvm-examples
+*Compilers/Duktape/hello/hello.c, native_print function added.
+*Compilers/Duktape/cmdline/duk_cmdline.c, native_print function added.
+-Mobile C/editor_font_size.c
+-Mobile C/text_output_font_size.c
+
+--------------Examples 1.0.9--------------
+
+*String/iconv/iso-8859-1_to_utf.c modified to support some additional platforms.
+*APR moves to Portability.
+*Application/example_shell.c revised.
+-Graphics/SDL2/lesson01
+
+--------------Examples 1.0.8--------------
+
++Graphics/SDL2.
++Graphics/PixelDisplay/pixel_display_demo.
+*Graphics/FreeType/freetype_demo.c, revised to use unicode character.
+*Graphics/OpenGL/* , Graphics/OpenGL ES2/* modified to use callback registration.
+*VersionControl/*, moves to Network.
+*.proj.c files are modified to handle abnormal termination.
+*App API renamed to Mobile C.
+*Platforms/POSIX, moved to POSIX.
+*Platforms/Android/sensor_accelerometer.c, moved to Sensor/sensor_accelerometer.c.
+*Platforms/IOS/openal_demo.c, openal_microphone.c moved to Audio/OpenAL.
+*Platforms/OSX/system.c, Android/system.c, moved to Languages/C/Standard C/system.c.
+-Platforms
+
+--------------Examples 1.0.7--------------
+
++Languages/C/assert_test.c
+*Application/mosh.c, renamed to example_shell.c
+-Compilers/Clang
+-Compilers/LLVM
+
+--------------Examples 1.0.6--------------
+
++APR/apr_array_sample.c
++Languages/Javascript
+*Languages/Preprocessor, moves to Languages/C/Preprocessor.
+*SQLite3, Expat, moves to Database.
++Database/JSON
++Languages/C/vscanf_test.c
++Compilers/Clang, Duktape, LLVM, Lua, Python3
+-Languages/Lua/lua.c, luac.c
+-Languages/Python3/python.c
+-Languages/Javascript/Duktape
++Languages/C++/hello_world.cpp
+*POSIX moves to Platforms
+*Platforms/Android/dlsym.c, moves to Platforms/POSIX
+*iconv, PCRE2, moves to String
+*HTML, moves to Graphics
+*Algorithm, moves to Application
+
+--------------Examples 1.0.5--------------
+
++Network/cURL/curl-7.48.0
+	Multiple source compilation example.
+	This is curl executable source code.
++Network/OpenSSL/openssl
+	Multiple source compilation example.
+	This is openssl executable source code.
+*curl_demo.c, fetch_file.c in folder Network/cURL
+	Modified to accept https URL.
++ftpget.c, ftpsget.c, ftpupload.c in folder Network/cURL
++Network/LibSSH2/ssh2.c
+*VersionControl/Git, VersionControl/Subversion/svn
+	Modified to use multiple source compilation.
+*Application/mosh.c
+	Adds some shell commands. (ls,cd,clear,home)
+*Languages/C/POSIX moves to POSIX.
++POSIX/regex_demo.c
+
+--------------Examples 1.0.4--------------
+
++Languages/Python3
++ArchiveFile/untar.c
++ArchiveFile/minigzip.c
+*ArchiveFile contains zLib, MiniZip
+*Graphics contains DirectX, FreeType, Image, OpenGL, OpenGL ES2
+*Network contains cURL, OpenSSL, Serf, Socket
+*VersionControl contains Git, Subversion
+
+--------------Examples 1.0.3--------------
+
+*FreeType , MiniZip , SQLite3
+	Source code modified to accept relative file path.
+*Language renames to Languages
+*Lua moves to Languages
+
+--------------Examples 1.0.2--------------
+
++Language/C/simple_stdarg.c
+
+--------------Examples 1.0.1--------------
+
++APR
++Expat
++Git
++iconv
++Lua
++OpenSSL
++PCRE2
++POSIX
++Serf
++Subversion ( Incomplete )
