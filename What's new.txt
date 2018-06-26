@@ -1,3 +1,17 @@
+﻿This file is depricated. Refer to github logs to check upcoming changes.
+
+--------------Examples 12————————
+
+*Network/cURL , Network/Git2 , Network/OpenSSL , Network/Subversion updated.
+*Network/OpenSSL , Network/LibSSH2 moved to Xtras.
+
+--------------Examples 11————————
+
++Languages/Python3/install_pip.c
++POSIX/terminal_test.c
++POSIX/file_demo.c
+-Xtras/IConv
+
 --------------Examples 10-----------------
 
 +Languages/Python3/sqlite3_python.py

@@ -21,11 +21,11 @@
  * ====================================================================
  */
 
- /* ==================================================================== */
+/* ==================================================================== */
 
 
-
- /*** Includes. ***/
+
+/*** Includes. ***/
 #define APR_WANT_STDIO
 #include <apr_want.h>
 
@@ -37,77 +37,77 @@
 
 #include "svn_private_config.h"
 
-
+
 /*** Code. ***/
 
 /* This implements the `svn_opt_subcommand_t' interface. */
 svn_error_t *
 svn_cl__add(apr_getopt_t *os,
-	void *baton,
-	apr_pool_t *pool)
+            void *baton,
+            apr_pool_t *pool)
 {
-	svn_cl__opt_state_t *opt_state = ((svn_cl__cmd_baton_t *)baton)->opt_state;
-	svn_client_ctx_t *ctx = ((svn_cl__cmd_baton_t *)baton)->ctx;
-	apr_array_header_t *targets;
-	int i;
-	apr_pool_t *iterpool;
-	apr_array_header_t *errors = apr_array_make(pool, 0, sizeof(apr_status_t));
+  svn_cl__opt_state_t *opt_state = ((svn_cl__cmd_baton_t *) baton)->opt_state;
+  svn_client_ctx_t *ctx = ((svn_cl__cmd_baton_t *) baton)->ctx;
+  apr_array_header_t *targets;
+  int i;
+  apr_pool_t *iterpool;
+  apr_array_header_t *errors = apr_array_make(pool, 0, sizeof(apr_status_t));
 
-	SVN_ERR(svn_cl__args_to_target_array_print_reserved(&targets, os,
-		opt_state->targets,
-		ctx, FALSE, pool));
+  SVN_ERR(svn_cl__args_to_target_array_print_reserved(&targets, os,
+                                                      opt_state->targets,
+                                                      ctx, FALSE, pool));
 
-	if (!targets->nelts)
-		return svn_error_create(SVN_ERR_CL_INSUFFICIENT_ARGS, 0, NULL);
+  if (! targets->nelts)
+    return svn_error_create(SVN_ERR_CL_INSUFFICIENT_ARGS, 0, NULL);
 
-	if (opt_state->depth == svn_depth_unknown)
-		opt_state->depth = svn_depth_infinity;
+  if (opt_state->depth == svn_depth_unknown)
+    opt_state->depth = svn_depth_infinity;
 
-	SVN_ERR(svn_cl__eat_peg_revisions(&targets, targets, pool));
+  SVN_ERR(svn_cl__eat_peg_revisions(&targets, targets, pool));
 
-	SVN_ERR(svn_cl__check_targets_are_local_paths(targets));
+  SVN_ERR(svn_cl__check_targets_are_local_paths(targets));
 
-	iterpool = svn_pool_create(pool);
-	for (i = 0; i < targets->nelts; i++)
-	{
-		const char *target = APR_ARRAY_IDX(targets, i, const char *);
+  iterpool = svn_pool_create(pool);
+  for (i = 0; i < targets->nelts; i++)
+    {
+      const char *target = APR_ARRAY_IDX(targets, i, const char *);
 
-		svn_pool_clear(iterpool);
-		SVN_ERR(svn_cl__check_cancel(ctx->cancel_baton));
-		SVN_ERR(svn_cl__try
-		(svn_client_add5(target,
-			opt_state->depth,
-			opt_state->force, opt_state->no_ignore,
-			opt_state->no_autoprops, opt_state->parents,
-			ctx, iterpool),
-			errors, opt_state->quiet,
-			SVN_ERR_ENTRY_EXISTS,
-			SVN_ERR_WC_PATH_NOT_FOUND,
-			0));
-	}
+      svn_pool_clear(iterpool);
+      SVN_ERR(svn_cl__check_cancel(ctx->cancel_baton));
+      SVN_ERR(svn_cl__try
+              (svn_client_add5(target,
+                               opt_state->depth,
+                               opt_state->force, opt_state->no_ignore,
+                               opt_state->no_autoprops, opt_state->parents,
+                               ctx, iterpool),
+               errors, opt_state->quiet,
+               SVN_ERR_ENTRY_EXISTS,
+               SVN_ERR_WC_PATH_NOT_FOUND,
+               0));
+    }
 
-	svn_pool_destroy(iterpool);
+  svn_pool_destroy(iterpool);
 
-	if (errors->nelts > 0)
-	{
-		svn_error_t *err;
+  if (errors->nelts > 0)
+    {
+      svn_error_t *err;
 
-		err = svn_error_create(SVN_ERR_ILLEGAL_TARGET, NULL, NULL);
-		for (i = 0; i < errors->nelts; i++)
-		{
-			apr_status_t status = APR_ARRAY_IDX(errors, i, apr_status_t);
-			if (status == SVN_ERR_WC_PATH_NOT_FOUND)
-				err = svn_error_quick_wrap(err,
-					_("Could not add all targets because "
-						"some targets don't exist"));
-			else if (status == SVN_ERR_ENTRY_EXISTS)
-				err = svn_error_quick_wrap(err,
-					_("Could not add all targets because "
-						"some targets are already versioned"));
-		}
+      err = svn_error_create(SVN_ERR_ILLEGAL_TARGET, NULL, NULL);
+      for (i = 0; i < errors->nelts; i++)
+        {
+          apr_status_t status = APR_ARRAY_IDX(errors, i, apr_status_t);
+          if (status == SVN_ERR_WC_PATH_NOT_FOUND)
+            err = svn_error_quick_wrap(err,
+                                       _("Could not add all targets because "
+                                         "some targets don't exist"));
+          else if (status == SVN_ERR_ENTRY_EXISTS)
+            err = svn_error_quick_wrap(err,
+                                       _("Could not add all targets because "
+                                         "some targets are already versioned"));
+        }
 
-		return svn_error_trace(err);
-	}
+      return svn_error_trace(err);
+    }
 
-	return SVN_NO_ERROR;
+  return SVN_NO_ERROR;
 }

@@ -19,7 +19,7 @@ int main()
 	printf("This should not display.");
 	printf(CLEARSCREEN);
 
-    printf("\x1b[5;20H");
+	printf("\x1b[5;20H");
 	printf(RED "red\n" RESET);
 	printf("\x1b[6;20H");
 	printf(GRN "green\n" RESET);

@@ -6,11 +6,11 @@
 int main()
 {
 	float weight = 70.0f;
-	printf("weight in kg ?");
+	printf("weight in kg? ");
 	scanf("%f", &weight);
 
 	float height = 1.77f;
-	printf("height in cm ?");
+	printf("height in cm? ");
 	scanf("%f", &height);
 
 	//10 to 18.4 : underweight

@@ -27,15 +27,15 @@
 
 svn_error_t *
 svn_cl__deprecated_merge_reintegrate(const char *source_path_or_url,
-	const svn_opt_revision_t *src_peg_revision,
-	const char *target_wcpath,
-	svn_boolean_t dry_run,
-	const apr_array_header_t *merge_options,
-	svn_client_ctx_t *ctx,
-	apr_pool_t *pool)
+                                     const svn_opt_revision_t *src_peg_revision,
+                                     const char *target_wcpath,
+                                     svn_boolean_t dry_run,
+                                     const apr_array_header_t *merge_options,
+                                     svn_client_ctx_t *ctx,
+                                     apr_pool_t *pool)
 {
-	SVN_ERR(svn_client_merge_reintegrate(source_path_or_url, src_peg_revision,
-		target_wcpath, dry_run, merge_options,
-		ctx, pool));
-	return SVN_NO_ERROR;
+  SVN_ERR(svn_client_merge_reintegrate(source_path_or_url, src_peg_revision,
+                                       target_wcpath, dry_run, merge_options,
+                                       ctx, pool));
+  return SVN_NO_ERROR;
 }

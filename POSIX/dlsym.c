@@ -18,7 +18,11 @@ typedef int(*sprintf_type)(char *, const char *, ...);
 #ifdef __APPLE__
 #define LIBC_PATH 0
 #else
+#ifdef __aarch64__
+#define LIBC_PATH "/system/lib64/libc.so"
+#else
 #define LIBC_PATH "/system/lib/libc.so"
+#endif
 #endif
 
 int main()

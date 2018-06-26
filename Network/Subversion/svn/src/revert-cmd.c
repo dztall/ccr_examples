@@ -21,11 +21,11 @@
  * ====================================================================
  */
 
- /* ==================================================================== */
+/* ==================================================================== */
 
 
-
- /*** Includes. ***/
+
+/*** Includes. ***/
 
 #include "svn_path.h"
 #include "svn_client.h"
@@ -35,50 +35,50 @@
 
 #include "svn_private_config.h"
 
-
+
 /*** Code. ***/
 
 /* This implements the `svn_opt_subcommand_t' interface. */
 svn_error_t *
 svn_cl__revert(apr_getopt_t *os,
-	void *baton,
-	apr_pool_t *scratch_pool)
+               void *baton,
+               apr_pool_t *scratch_pool)
 {
-	svn_cl__opt_state_t *opt_state = ((svn_cl__cmd_baton_t *)baton)->opt_state;
-	svn_client_ctx_t *ctx = ((svn_cl__cmd_baton_t *)baton)->ctx;
-	apr_array_header_t *targets = NULL;
-	svn_error_t *err;
+  svn_cl__opt_state_t *opt_state = ((svn_cl__cmd_baton_t *) baton)->opt_state;
+  svn_client_ctx_t *ctx = ((svn_cl__cmd_baton_t *) baton)->ctx;
+  apr_array_header_t *targets = NULL;
+  svn_error_t *err;
 
-	SVN_ERR(svn_cl__args_to_target_array_print_reserved(&targets, os,
-		opt_state->targets,
-		ctx, FALSE,
-		scratch_pool));
+  SVN_ERR(svn_cl__args_to_target_array_print_reserved(&targets, os,
+                                                      opt_state->targets,
+                                                      ctx, FALSE,
+                                                      scratch_pool));
 
-	/* Revert has no implicit dot-target `.', so don't you put that code here! */
-	if (!targets->nelts)
-		return svn_error_create(SVN_ERR_CL_INSUFFICIENT_ARGS, 0, NULL);
+  /* Revert has no implicit dot-target `.', so don't you put that code here! */
+  if (! targets->nelts)
+    return svn_error_create(SVN_ERR_CL_INSUFFICIENT_ARGS, 0, NULL);
 
-	/* Revert is especially conservative, by default it is as
-	   nonrecursive as possible. */
-	if (opt_state->depth == svn_depth_unknown)
-		opt_state->depth = svn_depth_empty;
+  /* Revert is especially conservative, by default it is as
+     nonrecursive as possible. */
+  if (opt_state->depth == svn_depth_unknown)
+    opt_state->depth = svn_depth_empty;
 
-	SVN_ERR(svn_cl__eat_peg_revisions(&targets, targets, scratch_pool));
+  SVN_ERR(svn_cl__eat_peg_revisions(&targets, targets, scratch_pool));
 
-	SVN_ERR(svn_cl__check_targets_are_local_paths(targets));
+  SVN_ERR(svn_cl__check_targets_are_local_paths(targets));
 
-	err = svn_client_revert3(targets, opt_state->depth,
-		opt_state->changelists,
-		FALSE /* clear_changelists */,
-		FALSE /* metadata_only */,
-		ctx, scratch_pool);
-	if (err
-		&& (err->apr_err == SVN_ERR_WC_INVALID_OPERATION_DEPTH)
-		&& (!SVN_DEPTH_IS_RECURSIVE(opt_state->depth)))
-	{
-		err = svn_error_quick_wrap
-		(err, _("Try 'svn revert --depth infinity' instead?"));
-	}
+  err = svn_client_revert3(targets, opt_state->depth,
+                           opt_state->changelists,
+                           FALSE /* clear_changelists */,
+                           FALSE /* metadata_only */,
+                           ctx, scratch_pool);
+  if (err
+      && (err->apr_err == SVN_ERR_WC_INVALID_OPERATION_DEPTH)
+      && (! SVN_DEPTH_IS_RECURSIVE(opt_state->depth)))
+    {
+      err = svn_error_quick_wrap
+        (err, _("Try 'svn revert --depth infinity' instead?"));
+    }
 
-	return svn_error_trace(err);
+  return svn_error_trace(err);
 }
