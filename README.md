@@ -1,2 +1,3 @@
-# ccr_examples
-Mobile C Examples
+# Mobile C Examples
+
+Collection of examples to demonstrate what is possible in Mobile C app.
