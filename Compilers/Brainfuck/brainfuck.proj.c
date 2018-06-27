@@ -147,7 +147,7 @@ void attachSourceFile(CPPuint programID, const char *fileName)
 		cppObjectAddPrologue(objectID, defines[i]);
 
 	cppObjectSourceFile(objectID, fileName);
-	cppObjectAddPCH(objectID, pchID);
+	cppObjectSetPCH(objectID, pchID);
 	if(cppCompileObject(objectID) != CPP_NO_ERROR)
 		exit(-1);
 	cppAttachObject(programID, objectID);
