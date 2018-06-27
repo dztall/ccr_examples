@@ -16,22 +16,44 @@ const char *systemHeaderSearchPaths[] = {};
 const char *sourceCodePaths[] = { __DIR__"/src", __DIR__"/src/network" };
 const char *sourceExclusionPatterns[] = {};
 const char *defines[] = { "#define FOO", "#define BAR" };
+const char *precompiledHeader = 
+"#include <stdint.h>\n"
+"#include <stdbool.h>\n"
+"#include <sys/types.h>\n"
+"#include <stdio.h>\n"
+"#include <stdlib.h>\n"
+"#include <string.h>\n"
+"#include <math.h>\n"
+"#include <assert.h>\n"
+"#include <limits.h>\n"
+"#include <locale.h>\n"
+"#include <fcntl.h>\n"
+"#include <ffi.h>\n"
+"#include <setjmp.h>\n"
+"#include <sys/cdefs.h>\n"
+"#include <signal.h>\n"
+"#include <pthread.h>\n"
+"#include <unistd.h>\n";
 
+CPPuint createPCH();
 void attachSourceFile(CPPuint programID, const char *fileName);
 const char *getFileExtension(const char *fileName);
 void attachSourceFiles(CPPuint programID);
 void exit_handler();
 
 CPPuint programID = 0;
+CPPuint pchID = 0;
 
 int main()
 {
 	atexit(exit_handler);
 
 	programID = cppCreateProgram();
+	
+	pchID = createPCH();
 
 	attachSourceFiles(programID);
-
+		
 #if SHOW_DEBUG_MESSAGES
 	printf("Compiling and linking...\n");
 #endif
@@ -54,6 +76,8 @@ void exit_handler()
 #if SHOW_DEBUG_MESSAGES
 	printf("Finished running.\n");
 #endif
+	if (pchID)
+		cppDeletePCH(pchID);
 	if (programID)
 		cppDeleteProgram(programID);
 }
@@ -121,14 +145,31 @@ void attachSourceFile(CPPuint programID, const char *fileName)
 	for (int i = 0; i < sizeof(defines) / sizeof(defines[0]); i++)
 		cppObjectAddPrologue(objectID, defines[i]);
 
-	//Appends code at the end of source file.
-	//cppObjectAddEpilogue(objectID, "//Blah blah...");
-
 	cppObjectSourceFile(objectID, fileName);
+	cppObjectAddPCH(objectID, pchID);
 	if(cppCompileObject(objectID) != CPP_NO_ERROR)
 		exit(-1);
 	cppAttachObject(programID, objectID);
 	cppDeleteObject(objectID);
+}
+
+CPPuint createPCH()
+{
+	CPPuint pchID = cppCreatePCH();
+
+	//Set system header search paths.
+	for (int i = 0; i < sizeof(systemHeaderSearchPaths) / sizeof(systemHeaderSearchPaths[0]); i++)
+		cppPCHAddSystemHeaderSearchPath(pchID, systemHeaderSearchPaths[i]);
+
+	//Set user header search paths.
+	for (int i = 0; i < sizeof(userHeaderSearchPaths) / sizeof(userHeaderSearchPaths[0]); i++)
+		cppPCHAddUserHeaderSearchPath(pchID, userHeaderSearchPaths[i]);
+
+	cppPCHCSourceString(pchID, "pch", precompiledHeader);
+	if(cppCompilePCH(pchID) != CPP_NO_ERROR)
+		exit(-1);
+	
+	return pchID;
 }
 
 const char *getFileExtension(const char *fileName)
