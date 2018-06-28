@@ -165,6 +165,10 @@ CPPuint createPCH()
 	for (int i = 0; i < sizeof(userHeaderSearchPaths) / sizeof(userHeaderSearchPaths[0]); i++)
 		cppPCHAddUserHeaderSearchPath(pchID, userHeaderSearchPaths[i]);
 
+	//Macro definitions...
+	for (int i = 0; i < sizeof(defines) / sizeof(defines[0]); i++)
+		cppPCHAddPrologue(pchID, defines[i]);
+
 	cppPCHCSourceString(pchID, "pch", precompiledHeader);
 	if(cppCompilePCH(pchID) != CPP_NO_ERROR)
 		exit(-1);
