@@ -12,7 +12,7 @@
 
 //#define SHOW_DEBUG_MESSAGES 1
 
-const char *userHeaderSearchPaths[] = { "lib" };
+const char *userHeaderSearchPaths[] = { "lib", "src" };
 const char *systemHeaderSearchPaths[] = {};
 const char *sourceCodePaths[] = { __DIR__"/src" };
 const char *sourceExclusionPatterns[] = {};
@@ -36,23 +36,23 @@ const char *precompiledHeader =
 "#include <pthread.h>\n"
 "#include <unistd.h>\n"
 "#include <sys/stat.h>\n"
-"#include \"src/tool_setup.h\"\n"
-"#include \"src/tool_cfgable.h\"\n"
-"#include \"src/tool_getparam.h\"\n"
-"#include \"src/tool_getpass.h\"\n"
-"#include \"src/tool_homedir.h\"\n"
-"#include \"src/tool_msgs.h\"\n"
-"#include \"src/tool_paramhlp.h\"\n"
-"#include \"src/tool_version.h\"\n"
-"#include \"src/tool_convert.h\"\n"
-"#include \"src/tool_binmode.h\"\n"
-"#include \"src/tool_libinfo.h\"\n"
-"#include \"src/tool_version.h\"\n"
-"#include \"src/tool_operate.h\"\n"
-"#include \"src/tool_panykey.h\"\n"
-"#include \"src/tool_vms.h\"\n"
-"#include \"src/tool_main.h\"\n"
-"#include \"src/tool_metalink.h\"\n";
+"#include \"tool_setup.h\"\n"
+"#include \"tool_cfgable.h\"\n"
+"#include \"tool_getparam.h\"\n"
+"#include \"tool_getpass.h\"\n"
+"#include \"tool_homedir.h\"\n"
+"#include \"tool_msgs.h\"\n"
+"#include \"tool_paramhlp.h\"\n"
+"#include \"tool_version.h\"\n"
+"#include \"tool_convert.h\"\n"
+"#include \"tool_binmode.h\"\n"
+"#include \"tool_libinfo.h\"\n"
+"#include \"tool_version.h\"\n"
+"#include \"tool_operate.h\"\n"
+"#include \"tool_panykey.h\"\n"
+"#include \"tool_vms.h\"\n"
+"#include \"tool_main.h\"\n"
+"#include \"tool_metalink.h\"\n";
 
 CPPuint createPCH();
 void attachSourceFile(CPPuint programID, const char *fileName);
