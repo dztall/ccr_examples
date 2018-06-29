@@ -128,7 +128,7 @@ void on_GLES2_Update(float timeStep_sec)
 
 void on_GLES2_Render()
 {
-	glClearColor(0.7f, 0.7f, 0.7f, 1);
+	glClearColor(0.3f, 0.3f, 0.3f, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	float modelViewMatrix[16] =
