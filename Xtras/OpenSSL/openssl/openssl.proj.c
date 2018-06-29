@@ -39,7 +39,24 @@ const char *precompiledHeader =
 "#include <sys/cdefs.h>\n"
 "#include <signal.h>\n"
 "#include <pthread.h>\n"
-"#include <unistd.h>\n";
+"#include <unistd.h>\n"
+#ifdef _WIN32
+"#include <Winsock2.h>\n"
+"#include <Windows.h>\n"
+#endif
+#if defined(__unix) || defined(__unix__)
+"#include <sys/time.h>\n"
+#endif
+"#include <openssl/e_os2.h>\n"
+"#include <openssl/ossl_typ.h>\n"
+"#include <openssl/bio.h>\n"
+"#include <openssl/x509.h>\n"
+"#include <openssl/lhash.h>\n"
+"#include <openssl/conf.h>\n"
+"#include <openssl/txt_db.h>\n"
+"#include <openssl/engine.h>\n"
+"#include <openssl/ocsp.h>\n"
+"#include <openssl/rand.h>\n";
 
 CPPuint createPCH();
 void attachSourceFile(CPPuint programID, const char *fileName);

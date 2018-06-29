@@ -33,7 +33,8 @@ const char *precompiledHeader =
 "#include <sys/cdefs.h>\n"
 "#include <signal.h>\n"
 "#include <pthread.h>\n"
-"#include <unistd.h>\n";
+"#include <unistd.h>\n"
+"#include <git2.h>\n";
 
 CPPuint createPCH();
 void attachSourceFile(CPPuint programID, const char *fileName);

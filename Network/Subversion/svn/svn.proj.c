@@ -33,7 +33,21 @@ const char *precompiledHeader =
 "#include <sys/cdefs.h>\n"
 "#include <signal.h>\n"
 "#include <pthread.h>\n"
-"#include <unistd.h>\n";
+"#include <unistd.h>\n"
+"#include \"svn_hash.h\"\n"
+"#include \"svn_cmdline.h\"\n"
+"#include \"svn_pools.h\"\n"
+"#include \"svn_client.h\"\n"
+"#include \"svn_string.h\"\n"
+"#include \"svn_error_codes.h\"\n"
+"#include \"svn_error.h\"\n"
+"#include \"svn_utf.h\"\n"
+"#include \"svn_sorts.h\"\n"
+"#include \"svn_subst.h\"\n"
+"#include \"svn_dirent_uri.h\"\n"
+"#include \"svn_path.h\"\n"
+"#include \"svn_props.h\"\n"
+"#include \"svn_xml.h\"\n";
 
 CPPuint createPCH();
 void attachSourceFile(CPPuint programID, const char *fileName);

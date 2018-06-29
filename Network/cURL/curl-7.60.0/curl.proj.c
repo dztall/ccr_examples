@@ -34,7 +34,25 @@ const char *precompiledHeader =
 "#include <sys/cdefs.h>\n"
 "#include <signal.h>\n"
 "#include <pthread.h>\n"
-"#include <unistd.h>\n";
+"#include <unistd.h>\n"
+"#include <sys/stat.h>\n"
+"#include \"src/tool_setup.h\"\n"
+"#include \"src/tool_cfgable.h\"\n"
+"#include \"src/tool_getparam.h\"\n"
+"#include \"src/tool_getpass.h\"\n"
+"#include \"src/tool_homedir.h\"\n"
+"#include \"src/tool_msgs.h\"\n"
+"#include \"src/tool_paramhlp.h\"\n"
+"#include \"src/tool_version.h\"\n"
+"#include \"src/tool_convert.h\"\n"
+"#include \"src/tool_binmode.h\"\n"
+"#include \"src/tool_libinfo.h\"\n"
+"#include \"src/tool_version.h\"\n"
+"#include \"src/tool_operate.h\"\n"
+"#include \"src/tool_panykey.h\"\n"
+"#include \"src/tool_vms.h\"\n"
+"#include \"src/tool_main.h\"\n"
+"#include \"src/tool_metalink.h\"\n";
 
 CPPuint createPCH();
 void attachSourceFile(CPPuint programID, const char *fileName);
