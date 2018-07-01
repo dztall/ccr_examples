@@ -9,6 +9,7 @@ pickle.dump( favorite_color, open( "save.p", "wb" ) )
 
 # Load the dictionary back from the pickle file.
 favorite_color_loaded = pickle.load( open( "save.p", "rb" ) )
+
 # favorite_color_loaded is now { "lion": "yellow", "kitty": "red" }
 print(favorite_color_loaded)
 
