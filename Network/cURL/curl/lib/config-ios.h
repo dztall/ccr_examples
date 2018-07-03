@@ -53,8 +53,11 @@
 #define HAVE_SYS_TIME_H         1
 #define HAVE_SYS_UTIME_H        1
 
-//dztall.
+//dztall
 #define HAVE_LONGLONG			1
+
+//dztall
+#define CURL_EXTERN_SYMBOL extern __attribute__ ((visibility ("default")))
 
 #define TIME_WITH_SYS_TIME      1
 
@@ -99,15 +102,23 @@
 
 #define RETSIGTYPE void
 
+//dztall
+#if defined(__LP64__) || defined(__arm64__) || defined(__aarch64__)
 #define SIZEOF_LONG 8
+#else
+#define SIZEOF_LONG 4
+#endif
+
 #define SIZEOF_INT              4
 #define SIZEOF_SHORT            2
-#ifdef __arm64__
+
+//dztall
+#if defined(__LP64__) || defined(__arm64__) || defined(__aarch64__)
 #define SIZEOF_SIZE_T           8
-#define SIZEOF_CURL_OFF_T 8
+#define SIZEOF_CURL_OFF_T		8
 #else
 #define SIZEOF_SIZE_T           4
-#define SIZEOF_CURL_OFF_T 4
+#define SIZEOF_CURL_OFF_T		4
 #endif
 
 #define HAVE_GETNAMEINFO 1

@@ -79,7 +79,6 @@
 //dztall.
 #define USE_SSLEAY            1
 #define USE_OPENSSL           1
-#define CURL_WANTS_CA_BUNDLE_ENV	1
 
 //dztall
 #define USE_LIBSSH2 1
@@ -96,20 +95,28 @@
 #define HAVE_RAND_EGD           1
 
 #define HAVE_IOCTL              1
-#define HAVE_FCNTL_O_NONBLOCK 1
+#define HAVE_FCNTL_O_NONBLOCK   1
 //#define HAVE_IOCTL_FIONBIO      1
 
 #define RETSIGTYPE void
 
+//dztall
+#if defined(__LP64__) || defined(__arm64__) || defined(__aarch64__)
+#define SIZEOF_LONG 8
+#else
 #define SIZEOF_LONG 4
+#endif
+
 #define SIZEOF_INT              4
 #define SIZEOF_SHORT            2
-#ifdef __LP64__
+
+//dztall
+#if defined(__LP64__) || defined(__arm64__) || defined(__aarch64__)
 #define SIZEOF_SIZE_T           8
-#define SIZEOF_CURL_OFF_T 8
+#define SIZEOF_CURL_OFF_T		8
 #else
 #define SIZEOF_SIZE_T           4
-#define SIZEOF_CURL_OFF_T 4
+#define SIZEOF_CURL_OFF_T		4
 #endif
 
 #define HAVE_GETNAMEINFO 1
