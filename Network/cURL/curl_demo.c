@@ -80,6 +80,10 @@ int main()
 
 	/* we want the body be written to this file handle instead of stdout */
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, bodyfile);
+    
+#if defined(__CCR__)
+	curl_easy_setopt(curl, CURLOPT_CAINFO, __APP_DIR__ "OpenSSL/ssl/cert.pem");
+#endif
 
 	/* get it! */
 	CURLcode res = curl_easy_perform(curl);
