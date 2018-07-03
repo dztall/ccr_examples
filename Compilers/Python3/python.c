@@ -1,4 +1,4 @@
-/* Minimal main program -- everything is loaded from the library */
+﻿/* Minimal main program -- everything is loaded from the library */
 
 #include "Python.h"
 
