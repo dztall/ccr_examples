@@ -81,8 +81,9 @@ int main()
 	/* we want the body be written to this file handle instead of stdout */
 	curl_easy_setopt(curl, CURLOPT_WRITEDATA, bodyfile);
     
-#if defined(__CCR__)
-	curl_easy_setopt(curl, CURLOPT_CAINFO, __APP_DIR__ "OpenSSL/ssl/cert.pem");
+	//dztall - Access Mobile C resource.
+#if defined(__CCR__) && defined(__RES_DIR__)
+	curl_easy_setopt(curl, CURLOPT_CAINFO, __RES_DIR__ "/OpenSSL/ssl/cert.pem");
 #endif
 
 	/* get it! */
