@@ -29,6 +29,7 @@ int main()
 	atexit(exit_handler);
 
 	programID = ccrCreateClangProgram();
+	ccrClangProgramTargetFile(programID, __FILE__ ".bc");
 	
 	attachSourceFiles(programID);
 		
@@ -54,6 +55,8 @@ void exit_handler()
 #if SHOW_DEBUG_MESSAGES
 	printf("Finished running.\n");
 #endif
+	if(programID)
+		ccrClangProgramDeleteClangObjectTargetFiles(programID);
 	if (programID)
 		ccrDeleteClangProgram(programID);
 }
