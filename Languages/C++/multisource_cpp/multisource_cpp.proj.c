@@ -83,7 +83,7 @@ void attachSourceFiles(CCRuint programID)
 		{
 			while ((ent = readdir(pDir)))
 			{
-				if (!strcmp(getFileExtension(ent->d_name), "c") && !isExcludedSourceFile(ent->d_name))
+				if ((!strcmp(getFileExtension(ent->d_name), "c") || !strcmp(getFileExtension(ent->d_name), "cpp") || !strcmp(getFileExtension(ent->d_name), "cc") || !strcmp(getFileExtension(ent->d_name), "c++")) && !isExcludedSourceFile(ent->d_name))
 				{
 					char buf[1024];
 					strcpy(buf, sourceFolder);
