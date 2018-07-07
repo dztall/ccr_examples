@@ -160,13 +160,15 @@ void *server_thread(void *param)
 
 		mutex.unlock();
 	}
+
+	return nullptr;
 }
 
 //Copied from : https://stackoverflow.com/questions/2283494/get-ip-address-of-an-interface-on-linux
 void showIP()
 {
 	struct ifaddrs *ifaddr, *ifa;
-	int family, s;
+	int s;
 	char host[NI_MAXHOST];
 
 	if (getifaddrs(&ifaddr) == -1)
