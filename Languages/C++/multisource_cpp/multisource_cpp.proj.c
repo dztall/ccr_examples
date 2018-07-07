@@ -30,7 +30,7 @@ int main()
 	atexit(exit_handler);
 
 	programID = ccrCreateClangProgram();
-	ccrClangProgramTargetFile(programID, __FILE__ ".out.bc");
+	ccrClangProgramTargetFile(programID, __FILE__ ".bc");
 	
 	attachSourceFiles(programID);
 		
