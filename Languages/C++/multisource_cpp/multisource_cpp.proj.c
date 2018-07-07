@@ -2,6 +2,7 @@
 
 //This file demonstrates how to run multiple source'ed c++ projects in Mobile C.
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -45,7 +46,7 @@ int main()
 #if SHOW_DEBUG_MESSAGES
 	printf("Running...\n");
 #endif
-	ccrRunClangProgram(programID);
+	ccrRunClangProgram(programID, false);
 
 	return 0;
 }
