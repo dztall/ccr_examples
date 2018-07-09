@@ -53,6 +53,11 @@ int main()
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
 		curl_easy_setopt(curl, CURLOPT_PROGRESSFUNCTION, progress_callback);
 		curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 0L);
+    
+		//dztall - Access Mobile C resource.
+#if defined(__CCR__) && defined(__RES_DIR__)
+		curl_easy_setopt(curl, CURLOPT_CAINFO, __RES_DIR__ "/OpenSSL/ssl/cert.pem");
+#endif
 
 		res = curl_easy_perform(curl);
 
