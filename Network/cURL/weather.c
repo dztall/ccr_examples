@@ -5,7 +5,7 @@
 
 int main()
 {
-	char city[512] = "Seoul";
+	char city[512] = "";
 	printf("Your city? ");
 	scanf("%s", city);
 
