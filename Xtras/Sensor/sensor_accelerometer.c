@@ -5,7 +5,6 @@
 #endif
 
 #include <stdio.h>
-#include <android_native_app_glue.h>
 #include <android/sensor.h>
 
 #define MAX_LOOP_COUNT 50
@@ -47,7 +46,6 @@ void PrintSensorInformation(const ASensor* sensor)
 
 int main()
 {
-	struct android_app* state = NULL;
 	ASensorManager* sensorManager;
 	const ASensor* accelerometerSensor;
 	ASensorEventQueue* sensorEventQueue;
@@ -74,17 +72,12 @@ int main()
 	// Read all pending events.
 	int ident;
 	int events;
-	struct android_poll_source* source;
 	int loopCount = 0;
 
 	// we will block forever waiting for events.
 	while (1)
 	{
-		ident = ALooper_pollAll(100, NULL, &events, (void**)&source);
-
-		// Process this event.
-		if (source != NULL)
-			source->process(state, source);
+		ident = ALooper_pollAll(100, NULL, &events, NULL);
 
 		// If a sensor has data, process it now.
 		if (ident == LOOPER_ID_USER)
