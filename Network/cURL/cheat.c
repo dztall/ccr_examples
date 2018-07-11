@@ -14,7 +14,7 @@ int main()
 	scanf("%s", keywords);
 
 	char command[512] = "";
-	sprintf(command, "curl cht.sh/%s/%s", city, keywords);
+	sprintf(command, "curl cht.sh/%s/%s", lang, keywords);
 	system(command);
 
 	return 0;
